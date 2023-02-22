@@ -29,6 +29,11 @@ func generatePasswordHash(password string) string {
 	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
 }
 
-func (s *AuthService) Login(username, password string) (courseGo.User, error) {
-	return courseGo.User{}, nil
+func (s *AuthService) Login(username, password string) (int, error) {
+	id, err := s.repo.Login(username, generatePasswordHash(password))
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
 }

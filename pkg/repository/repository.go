@@ -7,7 +7,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user courseGo.User) (int, error)
-	Login(username, password string) (courseGo.User, error)
+	Login(username, password string) (int, error)
 }
 
 type MakeQuantity interface {
