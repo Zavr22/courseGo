@@ -13,19 +13,19 @@ func NewMakeQuantityPostgres(db *sqlx.DB) *MakeQuantityPostgres {
 	return &MakeQuantityPostgres{db: db}
 }
 
-func (r *MakeQuantityPostgres) CreateQuantity(userId int, quantity courseGo.Quantity) (int, error) {
+func (r *MakeQuantityPostgres) CreateQuantity(userId int, quantity courseGo.CommQuantity) (int, error) {
 
 	return 0, nil
 }
 
-func (r *MakeQuantityPostgres) GetAll(userId int) ([]courseGo.Quantity, error) {
+func (r *MakeQuantityPostgres) GetAll(userId int) ([]courseGo.CommQuantity, error) {
 
-	return []courseGo.Quantity{}, nil
+	return []courseGo.CommQuantity{}, nil
 }
 
-func (r *MakeQuantityPostgres) GetById(userId, quantityId int) (courseGo.Quantity, error) {
+func (r *MakeQuantityPostgres) GetById(userId, quantityId int) (courseGo.CommQuantity, error) {
 
-	return courseGo.Quantity{}, nil
+	return courseGo.CommQuantity{}, nil
 }
 
 func (r *MakeQuantityPostgres) Delete(userId, quantityId int) error {

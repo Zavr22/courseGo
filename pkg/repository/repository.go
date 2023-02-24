@@ -11,9 +11,9 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	CreateQuantity(userId int, quantity courseGo.Quantity) (int, error)
-	GetAll(userId int) ([]courseGo.Quantity, error)
-	GetById(userId, quantityId int) (courseGo.Quantity, error)
+	CreateQuantity(userId int, quantity courseGo.CommQuantity) (int, error)
+	GetAll(userId int) ([]courseGo.CommQuantity, error)
+	GetById(userId, quantityId int) (courseGo.CommQuantity, error)
 	Delete(userId, quantityId int) error
 }
 

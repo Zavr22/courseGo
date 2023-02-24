@@ -1,3 +1,4 @@
+
 CREATE TABLE users
 (
     id            serial       not null unique,
@@ -14,9 +15,9 @@ CREATE TABLE projector
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null,
+    price         float not null
 
-)
+);
 
 CREATE TABLE monitor
 (
@@ -26,11 +27,11 @@ CREATE TABLE monitor
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null,
+    price         float not null
 
 );
 
-CREATE TABLE projector
+CREATE TABLE video_wall
 (
     id            serial       not null unique,
     name          varchar(255) not null,
@@ -38,7 +39,7 @@ CREATE TABLE projector
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null,
+    price         float not null
 
 );
 
@@ -49,13 +50,13 @@ CREATE TABLE mount
     categoryId int references category (id) on delete cascade not null,
     quantity int not null ,
     p_size varchar(255) not null,
-    price float not null,
+    price float not null
 );
 
 CREATE TABLE category
 (
     id          serial       not null unique,
-    name        varchar(255) not null ,
+    name        varchar(255) not null
 );
 
 CREATE TABLE commercial_quantity
@@ -70,7 +71,7 @@ CREATE TABLE users_comm_quantity
 (
     id  serial not null,
     usersId   int references users (id) on delete cascade      not null,
-    commQuantityId int references commercial_quantity (id) on delete cascade      not null,
+    commQuantityId int references commercial_quantity (id) on delete cascade      not null
 );
 
 
