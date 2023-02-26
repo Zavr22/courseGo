@@ -21,5 +21,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/signIn", h.signIn)
 	}
 
+	prod := router.Group("/prod")
+	{
+		prod.GET("/proj", h.getAllProjectors)
+	}
+
 	return router
 }

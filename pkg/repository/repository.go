@@ -18,6 +18,7 @@ type MakeQuantity interface {
 }
 
 type Projector interface {
+	GetAll() ([]courseGo.Projector, error)
 }
 
 type VideoWall interface {
@@ -35,6 +36,7 @@ type Category interface {
 type Repository struct {
 	Authorization
 	VideoWall
+	Projector
 	Mount
 	Monitor
 	Category
@@ -45,5 +47,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
 		MakeQuantity:  NewMakeQuantityPostgres(db),
+		Projector:     NewProjectorPostgres(db),
 	}
 }

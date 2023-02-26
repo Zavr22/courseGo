@@ -17,13 +17,19 @@ type MakeQuantity interface {
 	Delete(userId, quantityId int) error
 }
 
+type Projector interface {
+	GetAll() ([]courseGo.Projector, error)
+}
+
 type Service struct {
 	Authorization
 	MakeQuantity
+	Projector
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
+		Projector:     NewProjectorService(repos.Projector),
 	}
 }
