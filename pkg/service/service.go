@@ -21,15 +21,21 @@ type Projector interface {
 	GetAll() ([]courseGo.Projector, error)
 }
 
+type VideoWall interface {
+	GetAll() ([]courseGo.VideoWall, error)
+}
+
 type Service struct {
 	Authorization
 	MakeQuantity
 	Projector
+	VideoWall
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
 		Projector:     NewProjectorService(repos.Projector),
+		VideoWall:     NewVideoWallService(repos.VideoWall),
 	}
 }

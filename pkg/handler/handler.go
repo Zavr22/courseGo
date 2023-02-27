@@ -24,6 +24,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	prod := router.Group("/prod")
 	{
 		prod.GET("/proj", h.getAllProjectors)
+		prod.GET("/videoW", h.getAllVideoWalls)
+
 	}
 
 	return router

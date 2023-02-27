@@ -22,6 +22,7 @@ type Projector interface {
 }
 
 type VideoWall interface {
+	GetAll() ([]courseGo.VideoWall, error)
 }
 
 type Monitor interface {
@@ -48,5 +49,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Authorization: NewAuthPostgres(db),
 		MakeQuantity:  NewMakeQuantityPostgres(db),
 		Projector:     NewProjectorPostgres(db),
+		VideoWall:     NewVideoWallsPostgres(db),
 	}
 }
