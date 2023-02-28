@@ -25,6 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		prod.GET("/proj", h.getAllProjectors)
 		prod.GET("/videoW", h.getAllVideoWalls)
+		prod.GET("/monitors", h.getAllMonitors)
 
 	}
 
