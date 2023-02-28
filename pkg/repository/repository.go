@@ -30,6 +30,7 @@ type Monitor interface {
 }
 
 type Mount interface {
+	GetAll() ([]courseGo.Mount, error)
 }
 
 type Category interface {
@@ -52,5 +53,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Projector:     NewProjectorPostgres(db),
 		VideoWall:     NewVideoWallsPostgres(db),
 		Monitor:       NewMonitorPostgres(db),
+		Mount:         NewMountPostgres(db),
 	}
 }

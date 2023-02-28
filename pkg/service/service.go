@@ -29,12 +29,17 @@ type Monitor interface {
 	GetAll() ([]courseGo.Monitor, error)
 }
 
+type Mount interface {
+	GetAll() ([]courseGo.Mount, error)
+}
+
 type Service struct {
 	Authorization
 	MakeQuantity
 	Projector
 	VideoWall
 	Monitor
+	Mount
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -43,5 +48,6 @@ func NewService(repos *repository.Repository) *Service {
 		Projector:     NewProjectorService(repos.Projector),
 		VideoWall:     NewVideoWallService(repos.VideoWall),
 		Monitor:       NewMonitorService(repos.Monitor),
+		Mount:         NewMountService(repos.Mount),
 	}
 }
