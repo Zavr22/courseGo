@@ -1,9 +1,9 @@
 package courseGo
 
 type Projector struct {
-	Id         int    `json:"id"`
-	Name       string `json:"name" binding:"required"`
-	CategoryId int
+	Id         int     `json:"id"`
+	Name       string  `json:"name" binding:"required"`
+	CategoryId int     `json:"category-id" binding:"required" db:"category_id"`
 	Quantity   int     `json:"quantity" binding:"required"`
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
@@ -45,6 +45,7 @@ type Category struct {
 }
 
 type ProdInventory struct {
-	ProdId     int `json:"prod_Id"`
-	CategoryId int `json:"category_Id"`
+	ProdId     int    `json:"prod_Id"`
+	CategoryId int    `json:"category_Id"`
+	Name       string `json:"name"`
 }

@@ -7,6 +7,12 @@ CREATE TABLE users
     password_hash varchar(255) not null
 );
 
+CREATE TABLE category
+(
+    id          serial       not null unique,
+    name        varchar(255) not null
+);
+
 CREATE TABLE projector
 (
     id            serial       not null unique,
@@ -53,15 +59,11 @@ CREATE TABLE mount
     price float not null
 );
 
-CREATE TABLE category
-(
-    id          serial       not null unique,
-    name        varchar(255) not null
-);
+
 
 CREATE TABLE commercial_quantity
 (
-    id          serial not null,
+    id          int not null,
     productId   int not null,
     extraPosId  int not null,
     reciever    varchar(255) not null
@@ -71,7 +73,7 @@ CREATE TABLE users_comm_quantity
 (
     id  serial not null,
     usersId   int references users (id) on delete cascade      not null,
-    commQuantityId int references commercial_quantity (id) on delete cascade      not null
+    commQuantityId int       not null
 );
 
 
