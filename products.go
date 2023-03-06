@@ -8,6 +8,7 @@ type Projector struct {
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
+	Weight     float64 `json:"weight" binding:"required"`
 }
 
 type VideoWall struct {
@@ -35,8 +36,8 @@ type Mount struct {
 	Name       string `json:"name" binding:"required"`
 	CategoryId int
 	Quantity   int     `json:"quantity" binding:"required"`
-	Size       string  `json:"size" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
+	MaxWeight  float64 `json:"max-weight" binding:"required"`
 }
 
 type Category struct {
@@ -45,7 +46,13 @@ type Category struct {
 }
 
 type ProdInventory struct {
-	ProdId     int    `json:"prod_Id"`
-	CategoryId int    `json:"category_Id"`
-	Name       string `json:"name"`
+	Name  string  `json:"name"`
+	Price float64 `json:"price" binding:"required"`
+}
+
+type ProjParams struct {
+	Quantity   int     `json:"quantity" binding:"required"`
+	Brightness string  `json:"brightness" `
+	Price      float64 `json:"price" `
+	Weight     float64 `json:"weight" binding:"required"`
 }

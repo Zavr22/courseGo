@@ -21,7 +21,8 @@ CREATE TABLE projector
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null
+    price         float not null,
+    weight        float not null
 
 );
 
@@ -55,7 +56,7 @@ CREATE TABLE mount
     name varchar(255) not null ,
     categoryId int references category (id) on delete cascade not null,
     quantity int not null ,
-    p_size varchar(255) not null,
+    max_weight float not null,
     price float not null
 );
 

@@ -72,3 +72,25 @@ func (h *Handler) getAllMounts(c *gin.Context) {
 		Data: mounts,
 	})
 }
+
+type getProjWithExtraResp struct {
+	Data []courseGo.ProdInventory `json:"data"`
+}
+
+func (h *Handler) getProjWithExtra(c *gin.Context) {
+	var input courseGo.ProjParams
+	if err := c.BindJSON(&input); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	prod, err := h.services.PickUpProjectorWithExtra(input)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getProjWithExtraResp{
+		Data: prod,
+	})
+
+}

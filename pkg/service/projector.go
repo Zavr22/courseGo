@@ -9,6 +9,10 @@ type ProjectorService struct {
 	repo repository.Projector
 }
 
+func (s *ProjectorService) PickUpProjectorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	return s.repo.PickUpProjectorWithExtra(params)
+}
+
 func NewProjectorService(repo repository.Projector) *ProjectorService {
 	return &ProjectorService{repo: repo}
 }

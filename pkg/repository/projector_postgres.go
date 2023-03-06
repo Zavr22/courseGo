@@ -19,7 +19,24 @@ func (r *ProjectorPostgres) GetAll() ([]courseGo.Projector, error) {
 
 	query := fmt.Sprintf("SELECT * FROM %s",
 		projectorTable)
-	err := r.db.Select(&lists, query)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
 
-	return lists, err
+	return lists, nil
+}
+
+func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	var lists []courseGo.ProdInventory
+
+	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 
+		WHERE p.quantity = $1 AND p.brightness >=$2) 
+		UNION 
+		(SELECT  m.name, m.price FROM %s m 
+		WHERE m.quantity=$1 AND
+		m.max_weight>=$3 ORDER BY m.max_weight DESC);`, projectorTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		return nil, err
+	}
+	return lists, nil
 }
