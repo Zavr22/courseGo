@@ -24,7 +24,7 @@ func (r *MonitorPostgres) GetAll() ([]courseGo.Monitor, error) {
 	return lists, err
 }
 
-func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
 
 	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 

@@ -57,7 +57,9 @@ CREATE TABLE mount
     categoryId int references category (id) on delete cascade not null,
     quantity int not null ,
     max_weight float not null,
-    price float not null
+    price float not null,
+    maxWeight float not null,
+    roi float not null
 );
 
 

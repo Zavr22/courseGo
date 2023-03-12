@@ -38,6 +38,7 @@ type Mount struct {
 	Quantity   int     `json:"quantity" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
 	MaxWeight  float64 `json:"max-weight" binding:"required"`
+	Roi        float64 `json:"roi" binding:"required"`
 }
 
 type Category struct {
@@ -50,7 +51,7 @@ type ProdInventory struct {
 	Price float64 `json:"price" binding:"required"`
 }
 
-type ProjParams struct {
+type Params struct {
 	CategoryId int     `json:"category-id" `
 	Quantity   int     `json:"quantity" binding:"required"`
 	Brightness string  `json:"brightness" `

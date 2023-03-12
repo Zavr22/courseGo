@@ -26,7 +26,7 @@ func (r *ProjectorPostgres) GetAll() ([]courseGo.Projector, error) {
 	return lists, nil
 }
 
-func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
 
 	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 

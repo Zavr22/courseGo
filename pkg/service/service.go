@@ -19,17 +19,17 @@ type MakeQuantity interface {
 
 type Projector interface {
 	GetAll() ([]courseGo.Projector, error)
-	PickUpProjectorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error)
+	PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
 }
 
 type VideoWall interface {
 	GetAll() ([]courseGo.VideoWall, error)
-	PickUpVideoWallWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error)
+	PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
 }
 
 type Monitor interface {
 	GetAll() ([]courseGo.Monitor, error)
-	PickUpMonitorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error)
+	PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
 }
 
 type Mount interface {

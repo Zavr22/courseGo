@@ -23,7 +23,7 @@ func (r *VideoWallsPostgres) GetAll() ([]courseGo.VideoWall, error) {
 	return lists, err
 }
 
-func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
 
 	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
