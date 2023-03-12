@@ -77,20 +77,38 @@ type getProjWithExtraResp struct {
 	Data []courseGo.ProdInventory `json:"data"`
 }
 
-func (h *Handler) getProjWithExtra(c *gin.Context) {
+type getMonWithExtraResp struct {
+	Data []courseGo.ProdInventory `json:"data"`
+}
+
+func (h *Handler) getPrWithExtra(c *gin.Context) {
 	var input courseGo.ProjParams
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	prod, err := h.services.PickUpProjectorWithExtra(input)
-	if err != nil {
-		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
+	switch input.CategoryId {
+	case 1:
+		prod, err := h.services.PickUpProjectorWithExtra(input)
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
 
-	c.JSON(http.StatusOK, getProjWithExtraResp{
-		Data: prod,
-	})
+		c.JSON(http.StatusOK, getProjWithExtraResp{
+			Data: prod,
+		})
+	case 2:
+		prod, err := h.services.PickUpMonitorWithExtra(input)
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		c.JSON(http.StatusOK, getMonWithExtraResp{
+			Data: prod,
+		})
+
+	}
 
 }

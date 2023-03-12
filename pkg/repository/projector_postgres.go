@@ -30,7 +30,7 @@ func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.ProjParams)
 	var lists []courseGo.ProdInventory
 
 	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 
-		WHERE p.quantity = $1 AND p.brightness >=$2) 
+		WHERE p.quantity = $1 AND p.brightness >=$2 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND

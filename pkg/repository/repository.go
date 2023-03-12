@@ -28,6 +28,7 @@ type VideoWall interface {
 
 type Monitor interface {
 	GetAll() ([]courseGo.Monitor, error)
+	PickUpMonitorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error)
 }
 
 type Mount interface {

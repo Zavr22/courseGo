@@ -23,3 +23,18 @@ func (r *MonitorPostgres) GetAll() ([]courseGo.Monitor, error) {
 
 	return lists, err
 }
+
+func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	var lists []courseGo.ProdInventory
+
+	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 
+		WHERE mon.quantity = $1 AND mon.brightness >=$2 LIMIT 1) 
+		UNION 
+		(SELECT  m.name, m.price FROM %s m 
+		WHERE m.quantity=$1 AND
+		m.max_weight>=$3 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		return nil, err
+	}
+	return lists, nil
+}

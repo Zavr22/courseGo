@@ -16,3 +16,7 @@ func NewMonitorService(repo repository.Monitor) *MonitorService {
 func (s *MonitorService) GetAll() ([]courseGo.Monitor, error) {
 	return s.repo.GetAll()
 }
+
+func (s *MonitorService) PickUpMonitorWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	return s.repo.PickUpMonitorWithExtra(params)
+}

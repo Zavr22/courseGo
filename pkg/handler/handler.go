@@ -27,7 +27,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		prod.GET("/videoW", h.getAllVideoWalls)
 		prod.GET("/monitors", h.getAllMonitors)
 		prod.GET("/mounts", h.getAllMounts)
-		prod.POST("/getPrE", h.getProjWithExtra)
+		prod.POST("/getPrE", h.getPrWithExtra)
 
 	}
 

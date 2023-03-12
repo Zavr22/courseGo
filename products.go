@@ -51,6 +51,7 @@ type ProdInventory struct {
 }
 
 type ProjParams struct {
+	CategoryId int     `json:"category-id" `
 	Quantity   int     `json:"quantity" binding:"required"`
 	Brightness string  `json:"brightness" `
 	Price      float64 `json:"price" `
