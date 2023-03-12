@@ -24,6 +24,7 @@ type Projector interface {
 
 type VideoWall interface {
 	GetAll() ([]courseGo.VideoWall, error)
+	PickUpVideoWallWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error)
 }
 
 type Monitor interface {

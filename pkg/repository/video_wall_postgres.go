@@ -22,3 +22,18 @@ func (r *VideoWallsPostgres) GetAll() ([]courseGo.VideoWall, error) {
 
 	return lists, err
 }
+
+func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	var lists []courseGo.ProdInventory
+
+	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
+		WHERE vw.quantity = $1 AND vw.brightness >=$2 LIMIT 1) 
+		UNION 
+		(SELECT  m.name, m.price FROM %s m 
+		WHERE m.quantity=$1 AND
+		m.max_weight>=$3 ORDER BY m.max_weight DESC LIMIT 1);`, videoWallTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		return nil, err
+	}
+	return lists, nil
+}

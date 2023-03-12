@@ -81,6 +81,10 @@ type getMonWithExtraResp struct {
 	Data []courseGo.ProdInventory `json:"data"`
 }
 
+type getVideoWallWithExtraResp struct {
+	Data []courseGo.ProdInventory `json:"data"`
+}
+
 func (h *Handler) getPrWithExtra(c *gin.Context) {
 	var input courseGo.ProjParams
 	if err := c.BindJSON(&input); err != nil {
@@ -106,6 +110,16 @@ func (h *Handler) getPrWithExtra(c *gin.Context) {
 		}
 
 		c.JSON(http.StatusOK, getMonWithExtraResp{
+			Data: prod,
+		})
+	case 3:
+		prod, err := h.services.PickUpVideoWallWithExtra(input)
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		c.JSON(http.StatusOK, getVideoWallWithExtraResp{
 			Data: prod,
 		})
 

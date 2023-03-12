@@ -16,3 +16,7 @@ func NewVideoWallService(repo repository.VideoWall) *VideoWallService {
 func (s *VideoWallService) GetAll() ([]courseGo.VideoWall, error) {
 	return s.repo.GetAll()
 }
+
+func (s *VideoWallService) PickUpVideoWallWithExtra(params courseGo.ProjParams) ([]courseGo.ProdInventory, error) {
+	return s.repo.PickUpVideoWallWithExtra(params)
+}
