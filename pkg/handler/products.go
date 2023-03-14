@@ -126,3 +126,7 @@ func (h *Handler) getPrWithExtra(c *gin.Context) {
 	}
 
 }
+
+func (h *Handler) confirmOffer() {
+
+}
