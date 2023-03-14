@@ -13,9 +13,9 @@ func NewMakeQuantityPostgres(db *sqlx.DB) *MakeQuantityPostgres {
 	return &MakeQuantityPostgres{db: db}
 }
 
-func (r *MakeQuantityPostgres) CreateQuantity(userId int, quantity courseGo.CommQuantity) (int, error) {
+func (r *MakeQuantityPostgres) CreateQuantity(quantity []courseGo.ProdInventory) (courseGo.CommQuantity, error) {
 
-	return 0, nil
+	return courseGo.CommQuantity{}, nil
 }
 
 func (r *MakeQuantityPostgres) GetAll(userId int) ([]courseGo.CommQuantity, error) {

@@ -11,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	CreateQuantity(userId int, quantity courseGo.CommQuantity) (int, error)
+	CreateQuantity(quantity []courseGo.ProdInventory) (courseGo.CommQuantity, error)
 	GetAll(userId int) ([]courseGo.CommQuantity, error)
 	GetById(userId, quantityId int) (courseGo.CommQuantity, error)
 	Delete(userId, quantityId int) error
@@ -52,5 +52,6 @@ func NewService(repos *repository.Repository) *Service {
 		VideoWall:     NewVideoWallService(repos.VideoWall),
 		Monitor:       NewMonitorService(repos.Monitor),
 		Mount:         NewMountService(repos.Mount),
+		MakeQuantity:  NewCommQService(repos.MakeQuantity),
 	}
 }
