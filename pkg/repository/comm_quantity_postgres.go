@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/Zavr22/courseGo"
 	"github.com/jmoiron/sqlx"
 )
@@ -13,22 +14,11 @@ func NewMakeQuantityPostgres(db *sqlx.DB) *MakeQuantityPostgres {
 	return &MakeQuantityPostgres{db: db}
 }
 
-func (r *MakeQuantityPostgres) CreateQuantity(quantity []courseGo.ProdInventory) (courseGo.CommQuantity, error) {
-
-	return courseGo.CommQuantity{}, nil
-}
-
-func (r *MakeQuantityPostgres) GetAll(userId int) ([]courseGo.CommQuantity, error) {
-
-	return []courseGo.CommQuantity{}, nil
-}
-
-func (r *MakeQuantityPostgres) GetById(userId, quantityId int) (courseGo.CommQuantity, error) {
-
-	return courseGo.CommQuantity{}, nil
-}
-
-func (r *MakeQuantityPostgres) Delete(userId, quantityId int) error {
+func (r *MakeQuantityPostgres) ApproveQuantity(offer courseGo.CommQuantity) error {
+	_, err := r.db.Exec(`UPDATE %s SET status=$1 WHERE id=$2`, commQuantityTable, "approved", offer.Id)
+	if err != nil {
+		return fmt.Errorf("confirm error %w", err)
+	}
 
 	return nil
 }

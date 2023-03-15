@@ -11,10 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	CreateQuantity(quantity []courseGo.ProdInventory) (courseGo.CommQuantity, error)
-	GetAll(userId int) ([]courseGo.CommQuantity, error)
-	GetById(userId, quantityId int) (courseGo.CommQuantity, error)
-	Delete(userId, quantityId int) error
+	ApproveQuantity(offer courseGo.CommQuantity) error
 }
 
 type Projector interface {

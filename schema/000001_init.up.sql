@@ -67,9 +67,8 @@ CREATE TABLE mount
 CREATE TABLE commercial_quantity
 (
     id          int not null,
-    productId   int not null,
-    extraPosId  int not null,
-    reciever    varchar(255) not null
+    products    text[] not null,
+    status      varchar(40) not null
 );
 
 CREATE TABLE users_comm_quantity

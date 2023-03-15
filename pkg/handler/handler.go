@@ -28,7 +28,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		prod.GET("/monitors", h.getAllMonitors)
 		prod.GET("/mounts", h.getAllMounts)
 		prod.POST("/getPrE", h.getPrWithExtra)
-		prod.POST("/confirm", h.confirmOffer)
+		prod.POST("/confirm", h.approveQ)
 
 	}
 
