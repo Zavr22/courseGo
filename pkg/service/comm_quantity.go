@@ -1,7 +1,6 @@
 package service
 
 import (
-	"github.com/Zavr22/courseGo"
 	"github.com/Zavr22/courseGo/pkg/repository"
 )
 
@@ -13,6 +12,6 @@ func NewCommQService(repo repository.MakeQuantity) *CommQService {
 	return &CommQService{repo: repo}
 }
 
-func (s *CommQService) ApproveQuantity(offer courseGo.CommQuantity) error {
+func (s *CommQService) ApproveQuantity(offer int) error {
 	return s.repo.ApproveQuantity(offer)
 }

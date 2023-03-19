@@ -11,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offer courseGo.CommQuantity) error
+	ApproveQuantity(offer int) error
 }
 
 type Projector interface {

@@ -57,4 +57,5 @@ type Params struct {
 	Brightness string  `json:"brightness" `
 	Price      float64 `json:"price" `
 	Weight     float64 `json:"weight" binding:"required"`
+	ExtraRoi   float64 `json:"extra_roi" `
 }

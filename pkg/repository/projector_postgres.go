@@ -1,11 +1,10 @@
 package repository
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/Zavr22/courseGo"
 	"github.com/jmoiron/sqlx"
-	"github.com/lib/pq"
-	"math/rand"
 )
 
 type ProjectorPostgres struct {
@@ -30,20 +29,25 @@ func (r *ProjectorPostgres) GetAll() ([]courseGo.Projector, error) {
 
 func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
-	var commQ []courseGo.CommQuantity
-
+	var _ []courseGo.CommQuantity
 	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 
-		WHERE p.quantity = $1 AND p.brightness >=$2 LIMIT 1) 
+		WHERE p.quantity <= $1 AND p.brightness >=$2 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
-		WHERE m.quantity=$1 AND
-		m.max_weight>=$3 ORDER BY m.max_weight DESC);`, projectorTable, mountTable)
-	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		WHERE m.quantity<=$1 AND
+		m.max_weight=$3 AND m.roi>=$4 ORDER BY m.max_weight DESC LIMIT 1);`, projectorTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight, params.ExtraRoi); err != nil {
 		return nil, err
 	}
-	query2 := fmt.Sprintf(`INSERT INTO %s VALUES ($1, $2, "not approved")`, commQuantityTable)
-	if err := r.db.Select(&commQ, query2, rand.Int63(), pq.Array(lists)); err != nil {
+	var listStr, err = json.Marshal(lists)
+	if err != nil {
 		return nil, err
 	}
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
+	_, err = r.db.Exec(query2, listStr, "not approved")
+	if err != nil {
+		return nil, err
+	}
+
 	return lists, nil
 }
