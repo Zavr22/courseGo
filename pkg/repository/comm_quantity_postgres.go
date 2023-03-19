@@ -13,8 +13,8 @@ func NewMakeQuantityPostgres(db *sqlx.DB) *MakeQuantityPostgres {
 	return &MakeQuantityPostgres{db: db}
 }
 
-func (r *MakeQuantityPostgres) ApproveQuantity(offer int) error {
-	_, err := r.db.Exec(`UPDATE %s SET status=$1 WHERE id=$2`, commQuantityTable, "approved", offer)
+func (r *MakeQuantityPostgres) ApproveQuantity(offerId int) error {
+	_, err := r.db.Exec(`UPDATE %s SET status=$1 WHERE id=$2`, commQuantityTable, "approved", offerId)
 	if err != nil {
 		return fmt.Errorf("confirm error %w", err)
 	}

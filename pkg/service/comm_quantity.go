@@ -12,6 +12,6 @@ func NewCommQService(repo repository.MakeQuantity) *CommQService {
 	return &CommQService{repo: repo}
 }
 
-func (s *CommQService) ApproveQuantity(offer int) error {
-	return s.repo.ApproveQuantity(offer)
+func (s *CommQService) ApproveQuantity(offerId int) error {
+	return s.repo.ApproveQuantity(offerId)
 }

@@ -11,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offer int) error
+	ApproveQuantity(offerId int) error
 }
 
 type Projector interface {

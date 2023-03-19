@@ -128,7 +128,7 @@ func (h *Handler) getPrWithExtra(c *gin.Context) {
 }
 
 type reqOfferBody struct {
-	Offer *courseGo.CommQuantity `json:"offer"`
+	Offer courseGo.CommQuantity `json:"offer"`
 }
 
 func (h *Handler) approveQ(c *gin.Context) {
@@ -138,8 +138,7 @@ func (h *Handler) approveQ(c *gin.Context) {
 		return
 	}
 
-	err := h.services.ApproveQuantity(offer.Offer.Id)
-	if err != nil {
+	if err := h.services.ApproveQuantity(offer.Offer.Id); err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
