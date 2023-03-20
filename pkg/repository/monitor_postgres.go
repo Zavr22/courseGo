@@ -1,11 +1,10 @@
 package repository
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/Zavr22/courseGo"
 	"github.com/jmoiron/sqlx"
-	"github.com/lib/pq"
-	"math/rand"
 )
 
 type MonitorPostgres struct {
@@ -28,7 +27,7 @@ func (r *MonitorPostgres) GetAll() ([]courseGo.Monitor, error) {
 
 func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
-	var commQ []courseGo.CommQuantity
+	var _ []courseGo.CommQuantity
 
 	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 
 		WHERE mon.quantity = $1 AND mon.brightness >=$2 LIMIT 1) 
@@ -39,8 +38,13 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
 		return nil, err
 	}
-	query2 := fmt.Sprintf(`INSERT INTO %s VALUES ($1, $2, "not approved")`, commQuantityTable)
-	if err := r.db.Select(&commQ, query2, rand.Int63(), pq.Array(lists)); err != nil {
+	var listStr, err = json.Marshal(lists)
+	if err != nil {
+		return nil, err
+	}
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
+	_, err = r.db.Exec(query2, listStr, "not approved")
+	if err != nil {
 		return nil, err
 	}
 	return lists, nil

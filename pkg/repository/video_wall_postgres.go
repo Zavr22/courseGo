@@ -1,11 +1,10 @@
 package repository
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/Zavr22/courseGo"
 	"github.com/jmoiron/sqlx"
-	"github.com/lib/pq"
-	"math/rand"
 )
 
 type VideoWallsPostgres struct {
@@ -27,6 +26,7 @@ func (r *VideoWallsPostgres) GetAll() ([]courseGo.VideoWall, error) {
 
 func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	var lists []courseGo.ProdInventory
+	var _ []courseGo.CommQuantity
 
 	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
 		WHERE vw.quantity = $1 AND vw.brightness >=$2 LIMIT 1) 
@@ -37,10 +37,16 @@ func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
 		return nil, err
 	}
-	var commQ []courseGo.CommQuantity
-	query2 := fmt.Sprintf(`INSERT INTO %s VALUES ($1, $2, "not approved")`, commQuantityTable)
-	if err := r.db.Select(&commQ, query2, rand.Int63(), pq.Array(lists)); err != nil {
+	var _ []courseGo.CommQuantity
+	var listStr, err = json.Marshal(lists)
+	if err != nil {
 		return nil, err
+	}
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
+	_, err = r.db.Exec(query2, listStr, "not approved")
+	if err != nil {
+		return nil, err
+
 	}
 	return lists, nil
 }
