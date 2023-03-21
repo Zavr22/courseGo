@@ -13,7 +13,3 @@ type UsersCommQuantity struct {
 	UserId     int
 	QuantityId int
 }
-
-type Settings struct {
-	Roi int `json:"roi" binding:"required"`
-}
