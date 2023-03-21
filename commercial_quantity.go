@@ -1,7 +1,9 @@
 package courseGo
 
+import "github.com/google/uuid"
+
 type CommQuantity struct {
-	Id       int             `json:"id" binding:"required" db:"id"`
+	Id       uuid.UUID       `json:"id" binding:"required" db:"id"`
 	Product  []ProdInventory `json:"products"  `
 	Receiver string          `json:"receiver"`
 }

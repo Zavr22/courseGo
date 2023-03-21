@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Zavr22/courseGo"
+	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -11,7 +12,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offerId int) error
+	ApproveQuantity(offerId uuid.UUID) error
 }
 
 type Projector interface {
