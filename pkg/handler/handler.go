@@ -28,8 +28,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		prod.GET("/monitors", h.getAllMonitors)
 		prod.GET("/mounts", h.getAllMounts)
 		prod.POST("/getPrE", h.getPrWithExtra)
-		prod.POST("/confirm", h.approveQ)
 
+	}
+	commO := router.Group("/commO")
+	{
+		commO.GET("/commO", h.getAllCommO)
+		commO.POST("/confirm", h.approveQ)
 	}
 
 	return router

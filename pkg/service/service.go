@@ -13,6 +13,7 @@ type Authorization interface {
 
 type MakeQuantity interface {
 	ApproveQuantity(offerId uuid.UUID) error
+	GetAll() ([]courseGo.CommQuantity, error)
 }
 
 type Projector interface {

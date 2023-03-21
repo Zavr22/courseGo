@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"github.com/Zavr22/courseGo"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 )
@@ -21,4 +22,14 @@ func (r *MakeQuantityPostgres) ApproveQuantity(offerId uuid.UUID) error {
 	}
 
 	return nil
+}
+
+func (r *MakeQuantityPostgres) GetAll() ([]courseGo.CommQuantity, error) {
+	var lists []courseGo.CommQuantity
+
+	query := fmt.Sprintf("SELECT * FROM %s",
+		commQuantityTable)
+	err := r.db.Select(&lists, query)
+
+	return lists, err
 }
