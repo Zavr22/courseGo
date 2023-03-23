@@ -29,6 +29,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		prod.GET("/mounts", h.getAllMounts)
 		prod.POST("/getPrE", h.getPrWithExtra)
 		prod.POST("/sortPrByPrice", h.sortProjByPrice)
+		prod.POST("/sortVWByPrice", h.sortVWByPrice)
 
 	}
 	commO := router.Group("/commO")

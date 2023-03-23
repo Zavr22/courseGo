@@ -50,3 +50,27 @@ func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([
 	}
 	return lists, nil
 }
+
+func (r *VideoWallsPostgres) SortByPriceDesc() ([]courseGo.VideoWall, error) {
+	var lists []courseGo.VideoWall
+
+	query := fmt.Sprintf("SELECT * FROM %s p order by p.price DESC",
+		videoWallTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}
+
+func (r *VideoWallsPostgres) SortByPriceASC() ([]courseGo.VideoWall, error) {
+	var lists []courseGo.VideoWall
+
+	query := fmt.Sprintf("SELECT * FROM %s p order by p.price ASC",
+		videoWallTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}

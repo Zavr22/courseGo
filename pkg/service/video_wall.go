@@ -20,3 +20,11 @@ func (s *VideoWallService) GetAll() ([]courseGo.VideoWall, error) {
 func (s *VideoWallService) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	return s.repo.PickUpVideoWallWithExtra(params)
 }
+
+func (s *VideoWallService) SortByPriceDesc() ([]courseGo.VideoWall, error) {
+	return s.repo.SortByPriceDesc()
+}
+
+func (s *VideoWallService) SortByPriceASC() ([]courseGo.VideoWall, error) {
+	return s.repo.SortByPriceASC()
+}

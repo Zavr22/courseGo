@@ -161,3 +161,33 @@ func (h *Handler) sortProjByPrice(c *gin.Context) {
 	}
 
 }
+
+func (h *Handler) sortVWByPrice(c *gin.Context) {
+	var ch sortReqBody
+	if err := c.BindJSON(&ch); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	switch ch.choice {
+	case 1:
+		videoW, err := h.services.VideoWall.SortByPriceDesc()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllVideoWallResponse{
+			Data: videoW,
+		})
+	case 2:
+		videoW, err := h.services.VideoWall.SortByPriceASC()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllVideoWallResponse{
+			Data: videoW,
+		})
+
+	}
+}
