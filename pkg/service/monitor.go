@@ -20,3 +20,11 @@ func (s *MonitorService) GetAll() ([]courseGo.Monitor, error) {
 func (s *MonitorService) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
 	return s.repo.PickUpMonitorWithExtra(params)
 }
+
+func (s *MonitorService) SortByPriceDesc() ([]courseGo.Monitor, error) {
+	return s.repo.SortByPriceDesc()
+}
+
+func (s *MonitorService) SortByPriceASC() ([]courseGo.Monitor, error) {
+	return s.repo.SortByPriceASC()
+}

@@ -171,22 +171,52 @@ func (h *Handler) sortVWByPrice(c *gin.Context) {
 
 	switch ch.choice {
 	case 1:
-		videoW, err := h.services.VideoWall.SortByPriceDesc()
+		videoWall, err := h.services.VideoWall.SortByPriceDesc()
 		if err != nil {
 			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 			return
 		}
 		c.JSON(http.StatusOK, getAllVideoWallResponse{
-			Data: videoW,
+			Data: videoWall,
 		})
 	case 2:
-		videoW, err := h.services.VideoWall.SortByPriceASC()
+		videoWall, err := h.services.VideoWall.SortByPriceASC()
 		if err != nil {
 			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 			return
 		}
 		c.JSON(http.StatusOK, getAllVideoWallResponse{
-			Data: videoW,
+			Data: videoWall,
+		})
+
+	}
+}
+
+func (h *Handler) sortMonByPrice(c *gin.Context) {
+	var ch sortReqBody
+	if err := c.BindJSON(&ch); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	switch ch.choice {
+	case 1:
+		monitor, err := h.services.Monitor.SortByPriceDesc()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllMonitorsResponse{
+			Data: monitor,
+		})
+	case 2:
+		monitor, err := h.services.Monitor.SortByPriceASC()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllMonitorsResponse{
+			Data: monitor,
 		})
 
 	}

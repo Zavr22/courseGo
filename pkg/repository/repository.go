@@ -33,6 +33,8 @@ type VideoWall interface {
 type Monitor interface {
 	GetAll() ([]courseGo.Monitor, error)
 	PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
+	SortByPriceDesc() ([]courseGo.Monitor, error)
+	SortByPriceASC() ([]courseGo.Monitor, error)
 }
 
 type Mount interface {

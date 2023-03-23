@@ -50,3 +50,27 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 	return lists, nil
 
 }
+
+func (r *MonitorPostgres) SortByPriceDesc() ([]courseGo.Monitor, error) {
+	var lists []courseGo.Monitor
+
+	query := fmt.Sprintf("SELECT * FROM %s m order by m.price DESC",
+		monitorTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}
+
+func (r *MonitorPostgres) SortByPriceASC() ([]courseGo.Monitor, error) {
+	var lists []courseGo.Monitor
+
+	query := fmt.Sprintf("SELECT * FROM %s m order by m.price ASC",
+		monitorTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}
