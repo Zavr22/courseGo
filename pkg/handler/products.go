@@ -126,3 +126,38 @@ func (h *Handler) getPrWithExtra(c *gin.Context) {
 	}
 
 }
+
+type sortReqBody struct {
+	choice int
+}
+
+func (h *Handler) sortProjByPrice(c *gin.Context) {
+	var ch sortReqBody
+	if err := c.BindJSON(&ch); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	switch ch.choice {
+	case 1:
+		projectors, err := h.services.Projector.SortByPriceDesc()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllProjectorsResponse{
+			Data: projectors,
+		})
+	case 2:
+		projectors, err := h.services.Projector.SortByPriceASC()
+		if err != nil {
+			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, getAllProjectorsResponse{
+			Data: projectors,
+		})
+
+	}
+
+}

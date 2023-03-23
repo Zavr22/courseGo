@@ -20,3 +20,11 @@ func NewProjectorService(repo repository.Projector) *ProjectorService {
 func (s *ProjectorService) GetAll() ([]courseGo.Projector, error) {
 	return s.repo.GetAll()
 }
+
+func (s *ProjectorService) SortByPriceDesc() ([]courseGo.Projector, error) {
+	return s.repo.SortByPriceDesc()
+}
+
+func (s *ProjectorService) SortByPriceASC() ([]courseGo.Projector, error) {
+	return s.repo.SortByPriceASC()
+}

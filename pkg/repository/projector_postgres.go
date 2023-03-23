@@ -51,3 +51,27 @@ func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]
 
 	return lists, nil
 }
+
+func (r *ProjectorPostgres) SortByPriceDesc() ([]courseGo.Projector, error) {
+	var lists []courseGo.Projector
+
+	query := fmt.Sprintf("SELECT * FROM %s p order by p.price DESC",
+		projectorTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}
+
+func (r *ProjectorPostgres) SortByPriceASC() ([]courseGo.Projector, error) {
+	var lists []courseGo.Projector
+
+	query := fmt.Sprintf("SELECT * FROM %s p order by p.price ASC",
+		projectorTable)
+	if err := r.db.Select(&lists, query); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}

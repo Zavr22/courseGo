@@ -19,6 +19,8 @@ type MakeQuantity interface {
 type Projector interface {
 	GetAll() ([]courseGo.Projector, error)
 	PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
+	SortByPriceDesc() ([]courseGo.Projector, error)
+	SortByPriceASC() ([]courseGo.Projector, error)
 }
 
 type VideoWall interface {
