@@ -2,7 +2,6 @@ package repository
 
 import (
 	"github.com/Zavr22/courseGo"
-	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -12,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offerId uuid.UUID) error
+	ApproveQuantity(offerId int) error
 	GetAll() ([]courseGo.CommQuantity, error)
 }
 

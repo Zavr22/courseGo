@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/Zavr22/courseGo"
 	"github.com/Zavr22/courseGo/pkg/repository"
-	"github.com/google/uuid"
 )
 
 type Authorization interface {
@@ -12,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offerId uuid.UUID) error
+	ApproveQuantity(offerId int) error
 	GetAll() ([]courseGo.CommQuantity, error)
 }
 
