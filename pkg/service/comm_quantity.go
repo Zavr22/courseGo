@@ -13,8 +13,8 @@ func NewCommQService(repo repository.MakeQuantity) *CommQService {
 	return &CommQService{repo: repo}
 }
 
-func (s *CommQService) ApproveQuantity(offerId int) error {
-	return s.repo.ApproveQuantity(offerId)
+func (s *CommQService) ApproveQuantity(userId, offerId int) error {
+	return s.repo.ApproveQuantity(userId, offerId)
 }
 
 func (s *CommQService) GetAll() ([]courseGo.CommQuantity, error) {

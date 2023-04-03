@@ -7,7 +7,8 @@ import (
 )
 
 type reqOfferBody struct {
-	Offer courseGo.CommQuantity `json:"offer"`
+	UserId int                   `json:"userId"`
+	Offer  courseGo.CommQuantity `json:"offer"`
 }
 
 func (h *Handler) approveQ(c *gin.Context) {
@@ -17,7 +18,7 @@ func (h *Handler) approveQ(c *gin.Context) {
 		return
 	}
 
-	if err := h.services.ApproveQuantity(offer.Offer.Id); err != nil {
+	if err := h.services.ApproveQuantity(offer.UserId, offer.Offer.Id); err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}

@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	usersTable        = "users"
-	projectorTable    = "projector"
-	videoWallTable    = "video_wall"
-	monitorTable      = "monitor"
-	mountTable        = "mount"
-	categoryTable     = "category"
-	commQuantityTable = "commercial_quantity"
+	usersTable             = "users"
+	projectorTable         = "projector"
+	videoWallTable         = "video_wall"
+	monitorTable           = "monitor"
+	mountTable             = "mount"
+	categoryTable          = "category"
+	commQuantityTable      = "commercial_quantity"
+	usersCommQuantityTable = "users_comm_quantity"
 )
 
 type Config struct {

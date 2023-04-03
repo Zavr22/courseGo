@@ -11,7 +11,7 @@ type Authorization interface {
 }
 
 type MakeQuantity interface {
-	ApproveQuantity(offerId int) error
+	ApproveQuantity(userId, offerId int) error
 	GetAll() ([]courseGo.CommQuantity, error)
 }
 
