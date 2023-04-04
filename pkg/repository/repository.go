@@ -43,6 +43,10 @@ type Mount interface {
 type Category interface {
 }
 
+type Settings interface {
+	SetProfit(userId int, roi string) (string, error)
+}
+
 type Repository struct {
 	Authorization
 	VideoWall
@@ -51,6 +55,7 @@ type Repository struct {
 	Monitor
 	Category
 	MakeQuantity
+	Settings
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -61,5 +66,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		VideoWall:     NewVideoWallsPostgres(db),
 		Monitor:       NewMonitorPostgres(db),
 		Mount:         NewMountPostgres(db),
+		Settings:      NewSettingsPostgres(db),
 	}
 }

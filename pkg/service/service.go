@@ -15,6 +15,10 @@ type MakeQuantity interface {
 	GetAll() ([]courseGo.CommQuantity, error)
 }
 
+type Settings interface {
+	SetProfit(userId int, roi string) (string, error)
+}
+
 type Projector interface {
 	GetAll() ([]courseGo.Projector, error)
 	PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
@@ -47,6 +51,7 @@ type Service struct {
 	VideoWall
 	Monitor
 	Mount
+	Settings
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -57,5 +62,6 @@ func NewService(repos *repository.Repository) *Service {
 		Monitor:       NewMonitorService(repos.Monitor),
 		Mount:         NewMountService(repos.Mount),
 		MakeQuantity:  NewCommQService(repos.MakeQuantity),
+		Settings:      NewSettingsService(repos.Settings),
 	}
 }

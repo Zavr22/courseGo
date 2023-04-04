@@ -79,4 +79,9 @@ CREATE TABLE users_comm_quantity
     commQuantityId int       not null
 );
 
+CREATE TABLE settings
+(
+    roi float not null
+);
+
 

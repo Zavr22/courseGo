@@ -14,6 +14,7 @@ const (
 	categoryTable          = "category"
 	commQuantityTable      = "commercial_quantity"
 	usersCommQuantityTable = "users_comm_quantity"
+	settingsTable          = "settings"
 )
 
 type Config struct {

@@ -38,6 +38,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		commO.GET("/commO", h.getAllCommO)
 		commO.POST("/confirm", h.approveQ)
 	}
+	settings := router.Group("/settings")
+	{
+		settings.GET("/profit", h.setProfit)
+	}
 
 	return router
 }
