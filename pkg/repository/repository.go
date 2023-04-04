@@ -44,7 +44,7 @@ type Category interface {
 }
 
 type Settings interface {
-	SetProfit(userId int, roi string) (string, error)
+	SetProfit(userId int, roi float64) error
 }
 
 type Repository struct {

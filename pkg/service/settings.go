@@ -12,6 +12,6 @@ func NewSettingsService(repo repository.Settings) *SettingsService {
 	return &SettingsService{repo: repo}
 }
 
-func (s *SettingsService) SetProfit(userId int, roi string) (string, error) {
+func (s *SettingsService) SetProfit(userId int, roi float64) error {
 	return s.repo.SetProfit(userId, roi)
 }
