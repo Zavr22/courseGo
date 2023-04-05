@@ -9,8 +9,8 @@ type SettingsPostgres struct {
 	db *sqlx.DB
 }
 
-func (r *SettingsPostgres) SetProfit(userId int, roi float64) error {
-	_, err := r.db.Exec(`UPDATE %s SET roi=$1`, settingsTable, roi)
+func (r *SettingsPostgres) SetProfit(roi float64) error {
+	_, err := r.db.Exec(`UPDATE settings SET roi=$1 WHERE id=1`, roi)
 	if err != nil {
 		return fmt.Errorf("confirm error %w", err)
 	}

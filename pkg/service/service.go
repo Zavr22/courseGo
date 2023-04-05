@@ -16,7 +16,7 @@ type MakeQuantity interface {
 }
 
 type Settings interface {
-	SetProfit(userId int, roi float64) error
+	SetProfit(roi float64) error
 }
 
 type Projector interface {

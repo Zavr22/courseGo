@@ -40,7 +40,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	}
 	settings := router.Group("/settings")
 	{
-		settings.GET("/profit", h.setProfit)
+		settings.POST("/profit", h.setProfit)
 	}
 
 	return router

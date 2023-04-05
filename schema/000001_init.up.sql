@@ -81,6 +81,7 @@ CREATE TABLE users_comm_quantity
 
 CREATE TABLE settings
 (
+    id int,
     roi float not null
 );
 
