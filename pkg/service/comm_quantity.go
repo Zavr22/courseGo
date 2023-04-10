@@ -20,3 +20,7 @@ func (s *CommQService) ApproveQuantity(userId, offerId int) error {
 func (s *CommQService) GetAll() ([]courseGo.CommQuantity, error) {
 	return s.repo.GetAll()
 }
+
+func (s *CommQService) GetAllForMng(userId int) ([]courseGo.CommQuantity, error) {
+	return s.repo.GetAllForMng(userId)
+}

@@ -17,7 +17,7 @@ func (s *VideoWallService) GetAll() ([]courseGo.VideoWall, error) {
 	return s.repo.GetAll()
 }
 
-func (s *VideoWallService) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (s *VideoWallService) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	return s.repo.PickUpVideoWallWithExtra(params)
 }
 

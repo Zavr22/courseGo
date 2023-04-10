@@ -74,53 +74,60 @@ func (h *Handler) getAllMounts(c *gin.Context) {
 }
 
 type getProjWithExtraResp struct {
-	Data []courseGo.ProdInventory `json:"data"`
+	Data  []courseGo.ProdInventory `json:"data"`
+	ComId int                      `json:"commId"`
 }
 
 type getMonWithExtraResp struct {
-	Data []courseGo.ProdInventory `json:"data"`
+	Data  []courseGo.ProdInventory `json:"data"`
+	ComId int                      `json:"commId"`
 }
 
 type getVideoWallWithExtraResp struct {
-	Data []courseGo.ProdInventory `json:"data"`
+	Data  []courseGo.ProdInventory `json:"data"`
+	ComId int                      `json:"comId"`
 }
 
 func (h *Handler) getPrWithExtra(c *gin.Context) {
 	var input courseGo.Params
+
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 	switch input.CategoryId {
 	case 1:
-		prod, err := h.services.PickUpProjectorWithExtra(input)
+		prod, comId, err := h.services.PickUpProjectorWithExtra(input)
 		if err != nil {
 			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		c.JSON(http.StatusOK, getProjWithExtraResp{
-			Data: prod,
+			Data:  prod,
+			ComId: comId,
 		})
 	case 2:
-		prod, err := h.services.PickUpMonitorWithExtra(input)
+		prod, comId, err := h.services.PickUpMonitorWithExtra(input)
 		if err != nil {
 			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		c.JSON(http.StatusOK, getMonWithExtraResp{
-			Data: prod,
+			Data:  prod,
+			ComId: comId,
 		})
 	case 3:
-		prod, err := h.services.PickUpVideoWallWithExtra(input)
+		prod, comId, err := h.services.PickUpVideoWallWithExtra(input)
 		if err != nil {
 			NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		c.JSON(http.StatusOK, getVideoWallWithExtraResp{
-			Data: prod,
+			Data:  prod,
+			ComId: comId,
 		})
 
 	}

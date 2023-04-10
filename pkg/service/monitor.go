@@ -17,7 +17,7 @@ func (s *MonitorService) GetAll() ([]courseGo.Monitor, error) {
 	return s.repo.GetAll()
 }
 
-func (s *MonitorService) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (s *MonitorService) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	return s.repo.PickUpMonitorWithExtra(params)
 }
 

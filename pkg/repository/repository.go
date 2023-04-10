@@ -13,25 +13,26 @@ type Authorization interface {
 type MakeQuantity interface {
 	ApproveQuantity(userId, offerId int) error
 	GetAll() ([]courseGo.CommQuantity, error)
+	GetAllForMng(userId int) ([]courseGo.CommQuantity, error)
 }
 
 type Projector interface {
 	GetAll() ([]courseGo.Projector, error)
-	PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
+	PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error)
 	SortByPriceDesc() ([]courseGo.Projector, error)
 	SortByPriceASC() ([]courseGo.Projector, error)
 }
 
 type VideoWall interface {
 	GetAll() ([]courseGo.VideoWall, error)
-	PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
+	PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error)
 	SortByPriceDesc() ([]courseGo.VideoWall, error)
 	SortByPriceASC() ([]courseGo.VideoWall, error)
 }
 
 type Monitor interface {
 	GetAll() ([]courseGo.Monitor, error)
-	PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error)
+	PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error)
 	SortByPriceDesc() ([]courseGo.Monitor, error)
 	SortByPriceASC() ([]courseGo.Monitor, error)
 }

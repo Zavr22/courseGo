@@ -24,9 +24,10 @@ func (r *VideoWallsPostgres) GetAll() ([]courseGo.VideoWall, error) {
 	return lists, err
 }
 
-func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	var lists []courseGo.ProdInventory
 	var _ []courseGo.CommQuantity
+	var comId int
 
 	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
 		WHERE vw.quantity = $1 AND vw.brightness >=$2 LIMIT 1) 
@@ -35,20 +36,19 @@ func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([
 		WHERE m.quantity=$1 AND
 		m.max_weight>=$3 ORDER BY m.max_weight DESC LIMIT 1);`, videoWallTable, mountTable)
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	var _ []courseGo.CommQuantity
 	var listStr, err = json.Marshal(lists)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
-	_, err = r.db.Exec(query2, listStr, "not approved")
-	if err != nil {
-		return nil, err
-
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2) RETURNING id`, commQuantityTable)
+	row := r.db.QueryRow(query2, listStr, "not approved")
+	if err := row.Scan(&comId); err != nil {
+		return nil, 0, err
 	}
-	return lists, nil
+	return lists, comId, nil
 }
 
 func (r *VideoWallsPostgres) SortByPriceDesc() ([]courseGo.VideoWall, error) {

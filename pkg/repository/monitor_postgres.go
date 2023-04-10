@@ -25,10 +25,10 @@ func (r *MonitorPostgres) GetAll() ([]courseGo.Monitor, error) {
 	return lists, err
 }
 
-func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	var lists []courseGo.ProdInventory
 	var _ []courseGo.CommQuantity
-
+	var comId int
 	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 
 		WHERE mon.quantity = $1 AND mon.brightness >=$2 LIMIT 1) 
 		UNION 
@@ -36,18 +36,18 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 		WHERE m.quantity=$1 AND
 		m.max_weight>=$3 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	var listStr, err = json.Marshal(lists)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
-	_, err = r.db.Exec(query2, listStr, "not approved")
-	if err != nil {
-		return nil, err
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2) RETURNING id`, commQuantityTable)
+	row := r.db.QueryRow(query2, listStr, "not approved")
+	if err := row.Scan(&comId); err != nil {
+		return nil, 0, err
 	}
-	return lists, nil
+	return lists, comId, nil
 
 }
 

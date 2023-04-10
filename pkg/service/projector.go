@@ -9,7 +9,7 @@ type ProjectorService struct {
 	repo repository.Projector
 }
 
-func (s *ProjectorService) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (s *ProjectorService) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	return s.repo.PickUpProjectorWithExtra(params)
 }
 

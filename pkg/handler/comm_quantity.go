@@ -46,3 +46,20 @@ func (h *Handler) getAllCommO(c *gin.Context) {
 		Data: commO,
 	})
 }
+
+func (h *Handler) getAllCommOMng(c *gin.Context) {
+	var commO []courseGo.CommQuantity
+	userIdStr := c.GetHeader("X-User-Id")
+	userId, err := strconv.Atoi(userIdStr)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+	}
+	commO, err = h.services.GetAllForMng(userId)
+	if err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+	}
+
+	c.JSON(http.StatusOK, getAllCommOResponse{
+		Data: commO,
+	})
+}

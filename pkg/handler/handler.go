@@ -41,6 +41,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		commO.GET("/commO", h.getAllCommO)
 		commO.POST("/confirm", h.approveQ)
+		commO.GET("/getAllForMng", h.getAllCommOMng)
 	}
 	settings := router.Group("/settings")
 	{

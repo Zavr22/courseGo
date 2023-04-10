@@ -27,8 +27,9 @@ func (r *ProjectorPostgres) GetAll() ([]courseGo.Projector, error) {
 	return lists, nil
 }
 
-func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, error) {
+func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]courseGo.ProdInventory, int, error) {
 	var lists []courseGo.ProdInventory
+	var comId int
 	var _ []courseGo.CommQuantity
 	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 
 		WHERE p.quantity <= $1 AND p.brightness >=$2 LIMIT 1) 
@@ -37,19 +38,19 @@ func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]
 		WHERE m.quantity<=$1 AND
 		m.max_weight=$3 AND m.roi>=$4 ORDER BY m.max_weight DESC LIMIT 1);`, projectorTable, mountTable)
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight, params.ExtraRoi); err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	var listStr, err = json.Marshal(lists)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2)`, commQuantityTable)
-	_, err = r.db.Exec(query2, listStr, "not approved")
-	if err != nil {
-		return nil, err
+	query2 := fmt.Sprintf(`INSERT INTO %s (products, status) VALUES ($1, $2) RETURNING id`, commQuantityTable)
+	row := r.db.QueryRow(query2, listStr, "not approved")
+	if err := row.Scan(&comId); err != nil {
+		return nil, 0, err
 	}
 
-	return lists, nil
+	return lists, comId, nil
 }
 
 func (r *ProjectorPostgres) SortByPriceDesc() ([]courseGo.Projector, error) {
