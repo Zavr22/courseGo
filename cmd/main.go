@@ -22,7 +22,7 @@ func main() {
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error init config: %s", err.Error())
 	}
-
+	
 	if err := godotenv.Load(); err != nil {
 		logrus.Fatalf("error loading env variables: %s", err.Error())
 	}

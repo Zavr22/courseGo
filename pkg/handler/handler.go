@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/Zavr22/courseGo/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,9 @@ func NewHandler(services *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	router.Use(cors.New(config))
 	auth := router.Group("/auth")
 	{
 		auth.POST("/signUp", h.signUp)
@@ -30,7 +34,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		prod.POST("/getPrE", h.getPrWithExtra)
 		prod.POST("/sortPrByPrice", h.sortProjByPrice)
 		prod.POST("/sortVWByPrice", h.sortVWByPrice)
-		prod.POST("sortMonByPrice", h.sortMonByPrice)
+		prod.POST("/sortMonByPrice", h.sortMonByPrice)
 
 	}
 	commO := router.Group("/commO")
