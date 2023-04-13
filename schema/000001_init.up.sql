@@ -35,8 +35,8 @@ CREATE TABLE monitor
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null
-
+    price         float not null,
+    weight        float not null
 );
 
 CREATE TABLE video_wall
@@ -47,7 +47,8 @@ CREATE TABLE video_wall
     quantity      int not null ,
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
-    price         float not null
+    price         float not null,
+    weight        float not null
 
 );
 

@@ -19,6 +19,7 @@ type VideoWall struct {
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
+	Weight     float64 `json:"weight" binding:"required"`
 }
 
 type Monitor struct {
@@ -29,6 +30,7 @@ type Monitor struct {
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
+	Weight     float64 `json:"weight" binding:"required"`
 }
 
 type Mount struct {
