@@ -68,7 +68,7 @@ CREATE TABLE mount
 
 CREATE TABLE commercial_quantity
 (
-    id         int not null unique,
+    id         serial  unique,
     products    json not null,
     status      varchar(40) not null
 );

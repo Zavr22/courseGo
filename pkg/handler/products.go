@@ -90,7 +90,6 @@ type getVideoWallWithExtraResp struct {
 
 func (h *Handler) getPrWithExtra(c *gin.Context) {
 	var input courseGo.Params
-
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return

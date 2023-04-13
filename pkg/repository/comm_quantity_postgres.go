@@ -19,7 +19,7 @@ func (r *MakeQuantityPostgres) ApproveQuantity(userId, offerId int) error {
 	if err != nil {
 		return fmt.Errorf("confirm error %w", err)
 	}
-	_, err = r.db.Exec(`INSERT INTO %s (usersId, commQuantityId) VALUES ($1, $2)`, usersCommQuantityTable, userId, offerId)
+	_, err = r.db.Exec(`INSERT INTO %s ( usersId, commQuantityId) VALUES ( $1, $2)`, usersCommQuantityTable, userId, offerId)
 	if err != nil {
 		return fmt.Errorf("confirm error %w", err)
 	}
