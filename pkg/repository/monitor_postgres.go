@@ -30,7 +30,7 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 	var _ []courseGo.CommQuantity
 	var comId int
 	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 
-		WHERE mon.quantity = $1 AND mon.brightness >=$2 mon.contrast>=$3 LIMIT 1) 
+		WHERE mon.quantity = $1 AND mon.brightness >=$2 AND mon.contrast>=$3 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND

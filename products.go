@@ -62,5 +62,5 @@ type Params struct {
 	Price         float64 `json:"price" `
 	Weight        float64 `json:"weight" binding:"required"`
 	ExtraRoi      float64 `json:"extra_roi" `
-	FocalDistance float64 `json:"focalDistance" binding:"required"`
+	FocalDistance float64 `json:"focalDistance"`
 }
