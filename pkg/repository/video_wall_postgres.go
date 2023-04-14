@@ -30,7 +30,7 @@ func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([
 	var comId int
 
 	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
-		WHERE vw.quantity = $1 AND vw.brightness >=$2 vw.contrast>=$3 LIMIT 1) 
+		WHERE vw.quantity = $1 AND vw.brightness >=$2 AND vw.contrast>=$3 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND
