@@ -25,6 +25,7 @@ CREATE TABLE projector
     price         float not null,
     weight        float not null
 
+
 );
 
 CREATE TABLE monitor
@@ -76,8 +77,8 @@ CREATE TABLE commercial_quantity
 CREATE TABLE users_comm_quantity
 (
     id  serial not null,
-    usersId   int references users (id) on delete cascade      not null,
-    commQuantityId int       not null
+    usersId   int not null,
+    commQuantityId int not null
 );
 
 CREATE TABLE settings

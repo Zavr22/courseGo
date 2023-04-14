@@ -8,12 +8,12 @@ import (
 )
 
 type reqOfferBody struct {
-	Offer courseGo.CommQuantity `json:"offer"`
+	OfferId int `json:"offerId"`
 }
 
 func (h *Handler) approveQ(c *gin.Context) {
 	var offer reqOfferBody
-	userIdStr := c.GetHeader("Authorization")
+	userIdStr := c.GetHeader("X-User-Id")
 	userId, err := strconv.Atoi(userIdStr)
 	if err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
@@ -23,7 +23,7 @@ func (h *Handler) approveQ(c *gin.Context) {
 		return
 	}
 
-	if err := h.services.ApproveQuantity(userId, offer.Offer.Id); err != nil {
+	if err := h.services.ApproveQuantity(userId, offer.OfferId); err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}

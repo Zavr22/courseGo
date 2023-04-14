@@ -15,13 +15,14 @@ func NewMakeQuantityPostgres(db *sqlx.DB) *MakeQuantityPostgres {
 }
 
 func (r *MakeQuantityPostgres) ApproveQuantity(userId, offerId int) error {
-	_, err := r.db.Exec(`UPDATE %s SET status=$1 WHERE id=$2`, commQuantityTable, "approved", offerId)
+	_, err := r.db.Exec(`UPDATE commercial_quantity SET status=$1 WHERE id=$2`, "approved", offerId)
+	fmt.Println("ok")
 	if err != nil {
 		return fmt.Errorf("confirm error %w", err)
 	}
-	_, err = r.db.Exec(`INSERT INTO %s ( usersId, commQuantityId) VALUES ( $1, $2)`, usersCommQuantityTable, userId, offerId)
+	_, err = r.db.Exec(`INSERT INTO users_comm_quantity ( usersId, commQuantityId) VALUES ( $1, $2)`, userId, offerId)
 	if err != nil {
-		return fmt.Errorf("confirm error %w", err)
+		return fmt.Errorf("conf error %w", err)
 	}
 	return nil
 }
