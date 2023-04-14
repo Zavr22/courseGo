@@ -1,14 +1,15 @@
 package courseGo
 
 type Projector struct {
-	Id         int     `json:"id"`
-	Name       string  `json:"name" binding:"required"`
-	CategoryId int     `json:"category-id" binding:"required" db:"category_id"`
-	Quantity   int     `json:"quantity" binding:"required"`
-	Brightness string  `json:"brightness" binding:"required"`
-	Contrast   string  `json:"contrast" binding:"required"`
-	Price      float64 `json:"price" binding:"required"`
-	Weight     float64 `json:"weight" binding:"required"`
+	Id            int     `json:"id"`
+	Name          string  `json:"name" binding:"required"`
+	CategoryId    int     `json:"category-id" binding:"required" db:"category_id"`
+	Quantity      int     `json:"quantity" binding:"required"`
+	Brightness    string  `json:"brightness" binding:"required"`
+	Contrast      string  `json:"contrast" binding:"required"`
+	Price         float64 `json:"price" binding:"required"`
+	Weight        float64 `json:"weight" binding:"required"`
+	FocalDistance float64 `json:"focalDistance" binding:"required"`
 }
 
 type VideoWall struct {
@@ -54,10 +55,12 @@ type ProdInventory struct {
 }
 
 type Params struct {
-	CategoryId int     `json:"category-id" `
-	Quantity   int     `json:"quantity" binding:"required"`
-	Brightness string  `json:"brightness" `
-	Price      float64 `json:"price" `
-	Weight     float64 `json:"weight" binding:"required"`
-	ExtraRoi   float64 `json:"extra_roi" `
+	CategoryId    int     `json:"category-id" `
+	Quantity      int     `json:"quantity" binding:"required"`
+	Brightness    string  `json:"brightness" `
+	Contrast      string  `json:"contrast" `
+	Price         float64 `json:"price" `
+	Weight        float64 `json:"weight" binding:"required"`
+	ExtraRoi      float64 `json:"extra_roi" `
+	FocalDistance float64 `json:"focalDistance" binding:"required"`
 }

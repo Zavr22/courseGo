@@ -30,12 +30,12 @@ func (r *VideoWallsPostgres) PickUpVideoWallWithExtra(params courseGo.Params) ([
 	var comId int
 
 	query := fmt.Sprintf(`(SELECT  vw.name, vw.price FROM %s vw
-		WHERE vw.quantity = $1 AND vw.brightness >=$2 LIMIT 1) 
+		WHERE vw.quantity = $1 AND vw.brightness >=$2 vw.contrast>=$3 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND
-		m.max_weight>=$3 ORDER BY m.max_weight DESC LIMIT 1);`, videoWallTable, mountTable)
-	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		m.max_weight=$4 AND m.roi>=$5 ORDER BY m.max_weigh LIMIT 1);`, videoWallTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Contrast, params.Weight, params.ExtraRoi); err != nil {
 		return nil, 0, err
 	}
 	var _ []courseGo.CommQuantity

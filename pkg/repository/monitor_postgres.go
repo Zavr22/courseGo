@@ -30,12 +30,12 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 	var _ []courseGo.CommQuantity
 	var comId int
 	query := fmt.Sprintf(`(SELECT  mon.name, mon.price FROM %s mon 
-		WHERE mon.quantity = $1 AND mon.brightness >=$2 LIMIT 1) 
+		WHERE mon.quantity = $1 AND mon.brightness >=$2 mon.contrast>=$3 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND
-		m.max_weight>=$3 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
-	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight); err != nil {
+		m.max_weight=$4 AND m.roi>=$5 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Contrast, params.Weight, params.ExtraRoi); err != nil {
 		return nil, 0, err
 	}
 	var listStr, err = json.Marshal(lists)

@@ -32,12 +32,12 @@ func (r *ProjectorPostgres) PickUpProjectorWithExtra(params courseGo.Params) ([]
 	var comId int
 	var _ []courseGo.CommQuantity
 	query := fmt.Sprintf(`(SELECT  p.name, p.price FROM %s p 
-		WHERE p.quantity <= $1 AND p.brightness >=$2 LIMIT 1) 
+		WHERE p.quantity <= $1 AND p.brightness >=$2 p.contrast>=$3 p.focal_distance>=$4 LIMIT 1) 
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity<=$1 AND
-		m.max_weight=$3 AND m.roi>=$4 ORDER BY m.max_weight DESC LIMIT 1);`, projectorTable, mountTable)
-	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Weight, params.ExtraRoi); err != nil {
+		m.max_weight=$3 AND m.roi>=$5 ORDER BY m.max_weight DESC LIMIT 1);`, projectorTable, mountTable)
+	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Contrast, params.FocalDistance, params.Weight, params.ExtraRoi); err != nil {
 		return nil, 0, err
 	}
 	var listStr, err = json.Marshal(lists)

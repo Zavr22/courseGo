@@ -23,7 +23,8 @@ CREATE TABLE projector
     brightness    varchar(255) not null ,
     contrast      varchar(255) not null ,
     price         float not null,
-    weight        float not null
+    weight        float not null,
+    focal_distance float not null
 
 
 );
