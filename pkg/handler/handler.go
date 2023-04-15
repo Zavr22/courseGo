@@ -18,6 +18,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
+	config.AllowHeaders = append(config.AllowHeaders, "test")
 	allowedHeaders := []string{"Content-Type", "Authorization", "X-Requested-With", "X-User-Id"}
 	config.AllowHeaders = allowedHeaders
 	router.Use(cors.New(config))
