@@ -24,9 +24,9 @@ type VideoWall struct {
 }
 
 type Monitor struct {
-	Id         int    `json:"id"`
-	Name       string `json:"name" binding:"required"`
-	CategoryId int
+	Id         int     `json:"id"`
+	Name       string  `json:"name" binding:"required"`
+	CategoryId int     `json:"categoryId" db:"category_id"`
 	Quantity   int     `json:"quantity" binding:"required"`
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
