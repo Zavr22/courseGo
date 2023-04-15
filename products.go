@@ -3,7 +3,7 @@ package courseGo
 type Projector struct {
 	Id            int     `json:"id"`
 	Name          string  `json:"name" binding:"required"`
-	CategoryId    int     `json:"category-id" binding:"required" db:"category_id"`
+	CategoryId    int     `json:"category-id" db:"category_id"`
 	Quantity      int     `json:"quantity" binding:"required"`
 	Brightness    string  `json:"brightness" binding:"required"`
 	Contrast      string  `json:"contrast" binding:"required"`
@@ -13,9 +13,9 @@ type Projector struct {
 }
 
 type VideoWall struct {
-	Id         int    `json:"id"`
-	Name       string `json:"name" binding:"required"`
-	CategoryId int
+	Id         int     `json:"id"`
+	Name       string  `json:"name" binding:"required"`
+	CategoryId int     `json:"categoryId" db:"category_id"`
 	Quantity   int     `json:"quantity" binding:"required"`
 	Brightness string  `json:"brightness" binding:"required"`
 	Contrast   string  `json:"contrast" binding:"required"`
@@ -35,9 +35,9 @@ type Monitor struct {
 }
 
 type Mount struct {
-	Id         int    `json:"id"`
-	Name       string `json:"name" binding:"required"`
-	CategoryId int
+	Id         int     `json:"id"`
+	Name       string  `json:"name" binding:"required"`
+	CategoryId int     `json:"categoryId" db:"category_id"`
 	Quantity   int     `json:"quantity" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
 	MaxWeight  float64 `json:"max-weight" binding:"required"`
