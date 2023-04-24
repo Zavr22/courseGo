@@ -88,4 +88,10 @@ CREATE TABLE settings
     roi float not null
 );
 
+CREATE TABLE products
+(
+    id serial PRIMARY KEY,
+    name varchar(255) NOT NULL,
+    category_id int REFERENCES category(id) ON DELETE CASCADE NOT NULL
+);
 
