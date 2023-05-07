@@ -9,7 +9,7 @@ type Projector struct {
 	Contrast      string  `json:"contrast" binding:"required"`
 	Price         float64 `json:"price" binding:"required"`
 	Weight        float64 `json:"weight" binding:"required"`
-	FocalDistance float64 `json:"focalDistance" binding:"required"`
+	FocalDistance float64 `json:"focalDistance" binding:"required" db:"focal_distanse"`
 }
 
 type VideoWall struct {
