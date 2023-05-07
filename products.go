@@ -37,10 +37,10 @@ type Monitor struct {
 type Mount struct {
 	Id         int     `json:"id"`
 	Name       string  `json:"name" binding:"required"`
-	CategoryId int     `json:"categoryId" db:"category_id"`
+	CategoryId int     `json:"categoryId" db:"categoryid"`
 	Quantity   int     `json:"quantity" binding:"required"`
 	Price      float64 `json:"price" binding:"required"`
-	MaxWeight  float64 `json:"max-weight" binding:"required"`
+	MaxWeight  float64 `json:"max-weight" binding:"required" db:"max_weight"`
 	Roi        float64 `json:"roi" binding:"required"`
 }
 
