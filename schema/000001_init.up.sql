@@ -24,8 +24,7 @@ CREATE TABLE projector
     contrast      varchar(255) not null ,
     price         float not null,
     weight        float not null,
-    focal_distance float not null
-
+    focal_distanse float not null
 
 );
 

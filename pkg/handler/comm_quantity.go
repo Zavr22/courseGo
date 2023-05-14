@@ -8,7 +8,7 @@ import (
 )
 
 type reqOfferBody struct {
-	OfferId int `json:"offerId"`
+	OfferId int `json:"offerId" binding:"required"`
 }
 
 func (h *Handler) approveQ(c *gin.Context) {

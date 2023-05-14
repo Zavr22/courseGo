@@ -34,7 +34,7 @@ func (r *MonitorPostgres) PickUpMonitorWithExtra(params courseGo.Params) ([]cour
 		UNION 
 		(SELECT  m.name, m.price FROM %s m 
 		WHERE m.quantity=$1 AND
-		m.max_weight=$4 AND m.roi>=$5 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
+		m.max_weight>=$4 AND m.roi>=$5 ORDER BY m.max_weight DESC);`, monitorTable, mountTable)
 	if err := r.db.Select(&lists, query, params.Quantity, params.Brightness, params.Contrast, params.Weight, params.ExtraRoi); err != nil {
 		return nil, 0, err
 	}
