@@ -85,7 +85,7 @@ type getMonWithExtraResp struct {
 
 type getVideoWallWithExtraResp struct {
 	Data  []courseGo.ProdInventory `json:"data"`
-	ComId int                      `json:"comId"`
+	ComId int                      `json:"commId"`
 }
 
 func (h *Handler) getPrWithExtra(c *gin.Context) {
