@@ -45,3 +45,12 @@ func (r *MakeQuantityPostgres) GetAllForMng(userId int) ([]courseGo.CommQuantity
 	err := r.db.Select(&commO, query, userId)
 	return commO, err
 }
+
+func (r *MakeQuantityPostgres) CancelC(comId int) error {
+	_, err := r.db.Exec(`UPDATE commercial_quantity SET status=$1 WHERE id=$2`, "canceled", comId)
+	fmt.Println("ok")
+	if err != nil {
+		return fmt.Errorf("cancel error %w", err)
+	}
+	return nil
+}

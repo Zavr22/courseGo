@@ -24,3 +24,7 @@ func (s *CommQService) GetAll() ([]courseGo.CommQuantity, error) {
 func (s *CommQService) GetAllForMng(userId int) ([]courseGo.CommQuantity, error) {
 	return s.repo.GetAllForMng(userId)
 }
+
+func (s *CommQService) CancelC(comId int) error {
+	return s.repo.CancelC(comId)
+}

@@ -14,6 +14,7 @@ type MakeQuantity interface {
 	ApproveQuantity(userId, offerId int) error
 	GetAll() ([]courseGo.CommQuantity, error)
 	GetAllForMng(userId int) ([]courseGo.CommQuantity, error)
+	CancelC(comId int) error
 }
 
 type Projector interface {

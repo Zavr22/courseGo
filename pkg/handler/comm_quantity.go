@@ -63,3 +63,17 @@ func (h *Handler) getAllCommOMng(c *gin.Context) {
 		Data: commO,
 	})
 }
+
+func (h *Handler) cancelC(c *gin.Context) {
+	var offer reqOfferBody
+	if err := c.BindJSON(&offer); err != nil {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	if err := h.services.CancelC(offer.OfferId); err != nil {
+		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, "canceled")
+}
